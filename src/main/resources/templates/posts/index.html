@@ -16,8 +16,8 @@
             <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
         </form>
 
-        <ul th:each="post: ${posts}">
-            <li th:text="${post.content}" />
+        <ul class="card-wrapper" th:each="post: ${posts}">
+            <li class="card" th:text="${post.content}" />
         </ul>
     </div>
 </html>
