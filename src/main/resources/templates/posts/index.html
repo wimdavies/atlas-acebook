@@ -34,6 +34,11 @@
                 <ul th:each="comment: ${post.comments}">
                     <li class="comment">
                         [[${comment.content}]]
+                        <p th:if="${comment.user != null}" class="comment-username" th:text="${comment.user.username}"></p>
+                        <!--                remove this once DB reseeded with posts with user_id -->
+                        <p th:if="${comment.user == null}"></p>
+                        <!--                -->
+                        <p class="comment-timestamp" th:text="${comment.createdAt}"></p>
                     </li>
                 </ul>
                 <form action="#" th:action="@{'/posts/' + ${post.id} + '/comments'}" th:object="${comment}" method="post">
