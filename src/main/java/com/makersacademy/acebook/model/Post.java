@@ -11,6 +11,7 @@ import org.hibernate.annotations.TypeDef;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +31,11 @@ public class Post {
     @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
+
+    public String getFormattedCreatedAt() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM 'at' HH:mm");
+        return this.createdAt.format(formatter);
+    }
 
     @ManyToOne
     @JoinColumn(name="user_id", nullable = false)
