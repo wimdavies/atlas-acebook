@@ -20,7 +20,7 @@ public class User {
     private String username;
     private String password;
     private boolean enabled;
-
+    private String profilePictureUrl;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
@@ -29,17 +29,20 @@ public class User {
 
     public User() {
         this.enabled = TRUE;
+        this.profilePictureUrl = "/src/resources/static/default_profile_picture.jpg";
     }
 
     public User(String username, String password) {
         this.username = username;
         this.password = password;
         this.enabled = TRUE;
+        this.profilePictureUrl = "/src/resources/static/default_profile_picture.jpg";
     }
 
     public User(String username, String password, boolean enabled) {
         this.username = username;
         this.password = password;
         this.enabled = enabled;
+        this.profilePictureUrl = "/src/resources/static/default_profile_picture.jpg";
     }
 }
