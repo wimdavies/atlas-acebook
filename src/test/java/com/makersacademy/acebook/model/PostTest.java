@@ -76,6 +76,11 @@ public class PostTest {
 	}
 
 	@Test
+	public void imageUrlInitialisesAsNull() {
+		assertNull(post.getImageUrl());
+	}
+
+	@Test
 	public void postsHaveUserProfilePictureSet() {
 		User user = new User("Charlie", "Password");
 		Post post = new Post("Post content");
