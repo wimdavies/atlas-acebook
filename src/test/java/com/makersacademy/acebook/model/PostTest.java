@@ -74,4 +74,14 @@ public class PostTest {
 
 		assertEquals(likesList, post.getLikes());
 	}
+
+	@Test
+	public void postsHaveUserProfilePictureSet() {
+		User user = new User("Charlie", "Password");
+		Post post = new Post("Post content");
+		post.setUser(user);
+
+		assertEquals("/default-profile.jpg", post.getUser().getProfilePictureUrl());
+		assertThat(post.getUser().getProfilePictureUrl(), containsString("/default-profile.jpg"));
+	}
 }
