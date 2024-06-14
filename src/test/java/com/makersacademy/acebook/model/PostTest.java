@@ -79,4 +79,14 @@ public class PostTest {
 	public void imageUrlInitialisesAsNull() {
 		assertNull(post.getImageUrl());
 	}
+
+	@Test
+	public void postsHaveUserProfilePictureSet() {
+		User user = new User("Charlie", "Password");
+		Post post = new Post("Post content");
+		post.setUser(user);
+
+		assertEquals("/default-profile.jpg", post.getUser().getProfilePictureUrl());
+		assertThat(post.getUser().getProfilePictureUrl(), containsString("/default-profile.jpg"));
+	}
 }

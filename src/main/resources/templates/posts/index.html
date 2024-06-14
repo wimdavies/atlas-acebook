@@ -31,6 +31,9 @@
 
     <ul class="form-wrapper" th:each="post: ${posts}">
         <li class="post card">
+            <div class="default-profile-picture">
+                <img th:src="@{${post.user.profilePictureUrl}}" alt="default-profile-picture" width="50" height="50" />
+            </div>
             <p class="post-username" th:text="${post.user.username}"></p>
             <p class="post-timestamp" th:text="${post.createdAt}"></p>
             <img th:unless="${#strings.isEmpty(post.imageUrl)}" th:src="${post.imageUrl}" src="#" th:alt="|${post.user.username}'s image|" alt="#">
