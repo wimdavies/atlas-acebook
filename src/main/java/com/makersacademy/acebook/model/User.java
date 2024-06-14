@@ -29,20 +29,20 @@ public class User {
 
     public User() {
         this.enabled = TRUE;
-        this.profilePictureUrl = "/src/resources/static/default_profile_picture.jpg";
+        this.profilePictureUrl = "/default-profile.jpg";
     }
 
     public User(String username, String password) {
         this.username = username;
         this.password = password;
         this.enabled = TRUE;
-        this.profilePictureUrl = "/src/resources/static/default_profile_picture.jpg";
+        this.profilePictureUrl = "/default-profile.jpg";
     }
 
     public User(String username, String password, boolean enabled) {
         this.username = username;
         this.password = password;
         this.enabled = enabled;
-        this.profilePictureUrl = "/src/resources/static/default_profile_picture.jpg";
+        this.profilePictureUrl = "/default-profile.jpg";
     }
 }
