@@ -35,6 +35,7 @@ public class CommentsController {
         if (post.isPresent()) {
             comment.setPost(post.get());
         }
+        comment.onCreate();
         commentRepository.save(comment);
         return new RedirectView("/posts");
     }

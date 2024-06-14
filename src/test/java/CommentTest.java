@@ -14,6 +14,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = Application.class)
 public class CommentTest {
@@ -24,7 +26,7 @@ public class CommentTest {
     @Before
     public void setup() {
         System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
-        //        System.setProperty("webdriver.chrome.driver", "C:/Windows/chromedriver.exe");
+//                System.setProperty("webdriver.chrome.driver", "C:/Windows/chromedriver.exe");
         driver = new ChromeDriver();
         faker = new Faker();
     }
@@ -51,13 +53,12 @@ public class CommentTest {
         driver.findElement(By.className("post-submit-button")).click();
         // created a post
         List<WebElement> allPosts = driver.findElements(By.className("post"));
-        WebElement firstPost = allPosts
-                .get(0);
+        WebElement firstPost = allPosts.get(0);
         firstPost.findElement(By.id("content")).sendKeys(commentText);
         firstPost.findElement(By.className("comment-submit-button")).click();
         // created a comment on the first post on the page
         List<WebElement> allComments= driver.findElements(By.className("comment"));
-        // assert that there is any match for comment text in list of comments on page
-        Assert.assertTrue(allComments.stream().anyMatch(comment -> comment.getText().equals(commentText)));
+        String comment = allComments.get(0).getText();
+        assertThat(comment).contains(commentText);
     }
 }
