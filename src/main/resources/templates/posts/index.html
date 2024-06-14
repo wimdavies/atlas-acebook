@@ -44,19 +44,22 @@
                 <input sec:authorize="isAuthenticated()" class="like-button button" type="submit" value="Like &#x1F44D;"/>
             </form>
 
-            <ul class="comment-box" th:each="comment: ${post.comments}">
-                <li class="comment">
-                    [[${comment.content}]]
-                </li>
-            </ul>
-
-            <form class="comment-form" sec:authorize="isAuthenticated()" action="#" th:action="@{'/posts/' + ${post.id} + '/comments'}" th:object="${comment}" method="post">
-                <label for="content">Comment on this post:</label>
-                <textarea th:field="*{content}" placeholder="Add a comment"></textarea>
-                <input class="comment-submit-button" type="submit" value="Add comment">
-            </form>
-        </li>
-    </ul>
-</div>
-
+                <ul class="comment-box" th:each="comment: ${post.comments}">
+                    <li class="comment">
+                        [[${comment.content}]]
+                        <p th:if="${comment.user != null}" class="comment-username" th:text="${comment.user.username}"></p>
+                        <!--                remove this once DB reseeded with posts with user_id -->
+                        <p th:if="${comment.user == null}"></p>
+                        <!--                -->
+                        <p class="comment-timestamp" th:text="${comment.createdAt}"></p>
+                    </li>
+                </ul>
+                <form class="comment-form" sec:authorize="isAuthenticated()" action="#" th:action="@{'/posts/' + ${post.id} + '/comments'}" th:object="${comment}" method="post">
+                    <label for="content">Comment on this post:</label>
+                    <textarea th:field="*{content}" placeholder="Add a comment"></textarea>
+                    <input class="comment-submit-button" type="submit" value="Add comment">
+                </form>
+            </li>
+        </ul>
+    </div>
 </html>
