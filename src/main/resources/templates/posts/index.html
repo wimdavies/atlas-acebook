@@ -35,7 +35,7 @@
                 <img th:src="@{${post.user.profilePictureUrl}}" alt="default-profile-picture" width="50" height="50" />
             </div>
             <p class="post-username" th:text="${post.user.username}"></p>
-            <p class="post-timestamp" th:text="${post.createdAt}"></p>
+            <p class="post-timestamp" th:text="${post.formattedCreatedAt}"></p>
             <img th:unless="${#strings.isEmpty(post.imageUrl)}" th:src="${post.imageUrl}" src="#" th:alt="|${post.user.username}'s image|" alt="#">
             <p th:unless="${#strings.isEmpty(post.content)}" class="post-content" th:text="${post.content}"></p>
             <div class="likes-count">[[${post.likes.size()}]] [[${post.likes.size() == 1 ? "like" : "likes"}]]</div>
