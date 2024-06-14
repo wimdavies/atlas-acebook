@@ -1,6 +1,5 @@
 import com.github.javafaker.Faker;
 import com.makersacademy.acebook.Application;
-import jdk.vm.ci.meta.Local;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,6 +27,7 @@ public class PostSeleniumTest {
     @Before
     public void setup() {
         System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
+//        System.setProperty("webdriver.chrome.driver", "C:/Windows/chromedriver.exe");
         driver = new ChromeDriver();
         faker = new Faker();
     }
@@ -118,5 +118,36 @@ public class PostSeleniumTest {
         List<WebElement> timestamps = driver.findElements(By.className("post-timestamp"));
         String timestamp = timestamps.get(0).getText();
         assertThat(timestamp).isNotNull();
+    }
+
+    // imageUrl tests:
+    // test posts without upload do not have empty image displayed
+    // test image upload, post creation, image appears in that post displayed
+    // test alt text set
+    //
+
+    @Test
+    public void testUserProfilePictureDisplays() {
+        //Assigning a fake user
+        String fakeName = faker.name().firstName();
+
+        //Signing up into the app
+        driver.get("http://localhost:8080/users/new");
+        driver.findElement(By.id("username")).sendKeys(fakeName);
+        driver.findElement(By.id("password")).sendKeys("password");
+        driver.findElement(By.id("submit")).click();
+
+        // Logging into the app with same details
+        driver.findElement(By.id("username")).sendKeys(fakeName);
+        driver.findElement(By.id("password")).sendKeys("password");
+        driver.findElement(By.className("btn")).click();
+
+        //Add in fake posts
+        driver.findElement(By.id("content")).sendKeys("My first post");
+        driver.findElement(By.id("contentSubmit")).click();
+
+        List<WebElement> profilePicture = driver.findElements(By.className("default-profile-picture"));
+        String timestamp = profilePicture.get(0).getText();
+        assertThat(profilePicture).isNotNull();
     }
 }
